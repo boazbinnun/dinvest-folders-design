@@ -1252,8 +1252,18 @@ export default function DinvestPortalMockup() {
         )}
 
         {/* FOOTER */}
-        <div className="mt-6 text-center text-xs text-gray-400 pb-4">
-          Dinvest AG · inhouse.dinvest.ag · {t ? "Interaktiver Mockup" : "Interactive Mockup"} · {SCAN_DATE}
+        <div className="mt-6 text-center text-xs text-gray-400 pb-4 space-y-1">
+          <div>Dinvest AG · inhouse.dinvest.ag · {t ? "Interaktiver Mockup" : "Interactive Mockup"} · {SCAN_DATE}</div>
+          <div>
+            <a
+              href="https://github.com/boazbinnun/dinvest-folders-design/blob/main/SPEC.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-600 underline decoration-dotted transition-colors"
+            >
+              📄 {t ? "Implementierungs-Spezifikation" : "Implementation Spec"}
+            </a>
+          </div>
         </div>
       </div>
     </div>
