@@ -1155,10 +1155,20 @@ export default function DinvestPortalMockup() {
                 <div className="text-blue-200 text-xs">{t ? "Dokumentenverwaltung" : "Document Management"} — {t ? "Scan" : "Scan"}: {SCAN_DATE}</div>
               </div>
             </div>
-            <button onClick={() => setLang(lang === "de" ? "en" : "de")}
-              className="text-xs bg-blue-800 border border-blue-600 rounded px-3 py-1.5 hover:bg-blue-600 transition">
-              {t ? "🇬🇧 EN" : "🇩🇪 DE"}
-            </button>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://github.com/boazbinnun/dinvest-folders-design/blob/main/SPEC.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs bg-blue-800 border border-blue-600 rounded px-3 py-1.5 hover:bg-blue-600 transition flex items-center gap-1.5"
+              >
+                📄 {t ? "Spezifikation" : "Spec"}
+              </a>
+              <button onClick={() => setLang(lang === "de" ? "en" : "de")}
+                className="text-xs bg-blue-800 border border-blue-600 rounded px-3 py-1.5 hover:bg-blue-600 transition">
+                {t ? "🇬🇧 EN" : "🇩🇪 DE"}
+              </button>
+            </div>
           </div>
         </div>
         {/* Second row: Doc menu links */}
@@ -1252,18 +1262,8 @@ export default function DinvestPortalMockup() {
         )}
 
         {/* FOOTER */}
-        <div className="mt-6 text-center text-xs text-gray-400 pb-4 space-y-1">
-          <div>Dinvest AG · inhouse.dinvest.ag · {t ? "Interaktiver Mockup" : "Interactive Mockup"} · {SCAN_DATE}</div>
-          <div>
-            <a
-              href="https://github.com/boazbinnun/dinvest-folders-design/blob/main/SPEC.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-600 underline decoration-dotted transition-colors"
-            >
-              📄 {t ? "Implementierungs-Spezifikation" : "Implementation Spec"}
-            </a>
-          </div>
+        <div className="mt-6 text-center text-xs text-gray-400 pb-4">
+          Dinvest AG · inhouse.dinvest.ag · {t ? "Interaktiver Mockup" : "Interactive Mockup"} · {SCAN_DATE}
         </div>
       </div>
     </div>
