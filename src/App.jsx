@@ -1157,6 +1157,13 @@ export default function DinvestPortalMockup() {
             </div>
             <div className="flex items-center gap-2">
               <a
+                href="/Dinvest_Filing_Standard_v2.xlsx"
+                download
+                className="text-xs bg-blue-800 border border-blue-600 rounded px-3 py-1.5 hover:bg-blue-600 transition flex items-center gap-1.5"
+              >
+                📊 {t ? "Ablage-Standard" : "Filing Standard"}
+              </a>
+              <a
                 href="https://github.com/boazbinnun/dinvest-folders-design/blob/main/SPEC.md"
                 target="_blank"
                 rel="noopener noreferrer"
