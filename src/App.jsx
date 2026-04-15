@@ -45,78 +45,91 @@ const PROPERTIES = {
 
 const MANDANT_CATEGORIES = [
   { id: "ablage", num: "01", de: "Ablage", en: "Filing Archive", icon: "📁", legal: "OR 958f, MWSTG", retention: "10 Jahre",
+    currentFolder: { name: "Ablage/", action: "prefix", label: "Add number prefix" },
     statuses: { "020": "ok", "023": "ok", "200": "ok", "201": "ok" },
     fileCounts: { "020": 233, "023": 213, "200": 479, "201": 337 },
     gaps: {},
     desc_de: "Laufende Rechnungen und Bankauszüge, nach Jahr geordnet",
     desc_en: "Current invoices and bank statements, organized by year" },
   { id: "vertrag", num: "02", de: "Bewirtschaftungsvertrag", en: "Management Contract", icon: "📋", legal: "OR 394ff", retention: "Dauer+10J",
+    currentFolder: { name: "Bewirtschaftungsvertrag/", action: "prefix", label: "Add number prefix" },
     statuses: { "020": "ok", "023": "ok", "200": "partial", "201": "partial" },
     fileCounts: { "020": 11, "023": 5, "200": 1, "201": 1 },
     gaps: { "200": "Only 1 file — missing signed contract or annexes", "201": "Only 1 file — missing signed contract or annexes" },
     desc_de: "Verwaltungsvertrag zwischen Eigentümer und Dinvest",
     desc_en: "Management contract between owner and Dinvest" },
   { id: "buchhaltung", num: "03", de: "Buchhaltung", en: "Accounting", icon: "💰", legal: "OR 958f, MWSTG", retention: "10-20 Jahre",
+    currentFolder: { name: "Buchhaltung/", action: "prefix", label: "Add number prefix" },
     statuses: { "020": "ok", "023": "ok", "200": "ok", "201": "ok" },
     fileCounts: { "020": 67, "023": 48, "200": 44, "201": 30 },
     gaps: {},
     desc_de: "Jahresabschluss, HNK-Abrechnungen, Inkasso, Bankbelege",
     desc_en: "Annual statements, ancillary costs, collections, bank receipts" },
   { id: "versicherungen", num: "04", de: "Versicherungen", en: "Insurance", icon: "🛡️", legal: "VVG", retention: "Dauer+10J",
+    currentFolder: { name: "Versicherungen/", action: "prefix", label: "Add number prefix" },
     statuses: { "020": "ok", "023": "partial", "200": "partial", "201": "partial" },
     fileCounts: { "020": 33, "023": 4, "200": 2, "201": 3 },
     gaps: { "023": "Only 4 files — missing liability policy and schedule", "200": "Only 2 files — missing building and liability policies", "201": "Only 3 files — missing building insurance schedule" },
     desc_de: "Aktuelle und alte Versicherungspolicen (Gebäude, Haftpflicht)",
     desc_en: "Current and old insurance policies (building, liability)" },
   { id: "service", num: "05", de: "Service-Verträge", en: "Service Contracts", icon: "🔧", legal: "OR 363ff", retention: "Dauer+10J",
+    currentFolder: { name: "Handwerker/ ⚠", action: "split", label: "Split from 11 Renovationen" },
     statuses: { "020": "partial", "023": "partial", "200": "missing", "201": "missing" },
     fileCounts: { "020": "~40*", "023": "~40*", "200": 0, "201": 0 },
     gaps: { "020": "Files exist in Handwerker folder — need to split out", "023": "Files exist in Handwerker folder — need to split out", "200": "No service contracts found — HVAC, elevator, cleaning needed", "201": "No service contracts found — HVAC, elevator, cleaning needed" },
     desc_de: "Heizung, Lift, Reinigung, Gartenpflege (*in Handwerker-Ordner)",
     desc_en: "HVAC, elevator, cleaning, landscaping (*in Handwerker folder)" },
   { id: "hauswartung", num: "06", de: "Hauswartung", en: "Caretaker", icon: "🏠", legal: "Best Practice", retention: "Aktiv",
+    currentFolder: { name: "Hauswart/", action: "rename", label: "Rename + number prefix" },
     statuses: { "020": "ok", "023": "ok", "200": "ok", "201": "partial" },
     fileCounts: { "020": 18, "023": 5, "200": 16, "201": 1 },
     gaps: { "201": "Only 1 file — missing caretaker contract, access codes, cleaning schedule" },
     desc_de: "HW-Verträge, Aufträge, Zutritt-Codes, Reinigungspläne",
     desc_en: "Caretaker contracts, tasks, access codes, cleaning schedules" },
   { id: "schaeden", num: "07", de: "Versicherungsschäden", en: "Insurance Claims", icon: "⚠️", legal: "VVG", retention: "10J n. Abschl.",
+    currentFolder: { name: "Versicherungsschäden/", action: "prefix", label: "Add number prefix" },
     statuses: { "020": "partial", "023": "missing", "200": "ok", "201": "partial" },
     fileCounts: { "020": 3, "023": 0, "200": 13, "201": 3 },
     gaps: { "020": "Only 3 claims — check if historical claims are unfiled", "023": "No claims folder exists — create even if currently empty", "201": "Only 3 claims — verify all open cases are documented" },
     desc_de: "Schadenmeldungen für Allgemeinteile und Mietobjekte",
     desc_en: "Claims for common areas and rental units" },
   { id: "korrespondenz", num: "08", de: "Korrespondenz", en: "Correspondence", icon: "✉️", legal: "OR, DSG 2023", retention: "10 Jahre",
+    currentFolder: { name: "— no folder", action: "new", label: "Scattered in Ablage/Diverses — collect" },
     statuses: { "020": "partial", "023": "partial", "200": "missing", "201": "missing" },
     fileCounts: { "020": "verstreut", "023": "verstreut", "200": 0, "201": 0 },
     gaps: { "020": "Letters scattered across other folders — consolidate", "023": "Letters scattered across other folders — consolidate", "200": "No correspondence folder — owner/tenant letters missing", "201": "No correspondence folder — owner/tenant letters missing" },
     desc_de: "Briefe an/von Eigentümer, Mieter, Behörden, Handwerker",
     desc_en: "Letters to/from owner, tenants, authorities, contractors" },
   { id: "plaene", num: "09", de: "Pläne", en: "Building Plans", icon: "📐", legal: "SIA, VKF/BSV", retention: "Gebäudelebensd.",
+    currentFolder: { name: "Pläne/", action: "prefix", label: "Add number prefix" },
     statuses: { "020": "ok", "023": "ok", "200": "ok", "201": "partial" },
     fileCounts: { "020": 34, "023": 20, "200": 157, "201": 4 },
     gaps: { "201": "Only 4 plans — missing HVAC, electrical, and fire safety plans" },
     desc_de: "Grundriss, Heizung, Sanitär, Lüftung, Brandschutz, Elektro",
     desc_en: "Floor plans, HVAC, plumbing, ventilation, fire, electrical" },
   { id: "fotos", num: "10", de: "Fotos", en: "Photos", icon: "📷", legal: "Best Practice", retention: "Gebäudelebensd.",
+    currentFolder: { name: "Fotos/", action: "prefix", label: "Add number prefix" },
     statuses: { "020": "ok", "023": "ok", "200": "ok", "201": "ok" },
     fileCounts: { "020": 330, "023": 204, "200": 104, "201": 632 },
     gaps: {},
     desc_de: "Marketing-Fotos, Allgemeinteile, Zustandsdokumentation",
     desc_en: "Marketing photos, common areas, condition documentation" },
   { id: "renovationen", num: "11", de: "Renovationen", en: "Renovations", icon: "🔨", legal: "Best Practice, SIA 118", retention: "10+ Jahre",
+    currentFolder: { name: "Handwerker/ ⚠", action: "split", label: "Split from 05 Service-Verträge" },
     statuses: { "020": "partial", "023": "partial", "200": "missing", "201": "missing" },
     fileCounts: { "020": "~56*", "023": "~56*", "200": 0, "201": 0 },
     gaps: { "020": "Files in Handwerker folder — split into own category", "023": "Files in Handwerker folder — split into own category", "200": "No renovation records found — collect project docs", "201": "No renovation records found — collect project docs" },
     desc_de: "Projekte, Offerten, Rechnungen (*in Handwerker-Ordner)",
     desc_en: "Projects, quotes, invoices (*in Handwerker folder)" },
   { id: "mietverhaeltnisse", num: "12", de: "Mietverhältnisse", en: "Tenancy Overview", icon: "👥", legal: "OR 253ff", retention: "Aktuell",
+    currentFolder: { name: "Mieter/", action: "rename", label: "Rename + number prefix" },
     statuses: { "020": "ok", "023": "ok", "200": "ok", "201": "partial" },
     fileCounts: { "020": 681, "023": 157, "200": 8, "201": 6 },
     gaps: { "201": "Only 6 files for 61 units — missing rent roll and termination list" },
     desc_de: "Mieterspiegel, Kündigungsliste, Mieterverzeichnis",
     desc_en: "Rent roll, termination list, tenant directory" },
   { id: "compliance", num: "13", de: "Compliance", en: "Compliance", icon: "✅", legal: "EnG, NIV, VKF, DSG 2023", retention: "Permanent",
+    currentFolder: { name: "SINA/ (1 file)", action: "new", label: "Rename + build mostly new" },
     statuses: { "020": "partial", "023": "partial", "200": "partial", "201": "missing" },
     fileCounts: { "020": "minimal", "023": "minimal", "200": 1, "201": 0 },
     gaps: { "020": "Missing GEAK, SiNa/NIV, fire safety plan, land registry", "023": "Missing GEAK, electrical cert., fire safety, land registry", "200": "Only 1 file — missing GEAK, SiNa/NIV, fire safety, DSG notice", "201": "No compliance docs — all certificates need to be collected" },
@@ -510,9 +523,43 @@ const PageFolderStructure = ({ lang, t }) => {
   );
 };
 
+const actionBadge = (action, name) => {
+  const styles = {
+    prefix:  "bg-emerald-50 text-emerald-700 border border-emerald-200",
+    rename:  "bg-amber-50 text-amber-700 border border-amber-200",
+    split:   "bg-orange-50 text-orange-700 border border-orange-200",
+    new:     "bg-red-50 text-red-700 border border-red-200",
+  };
+  const labels = {
+    prefix: "→ Add prefix",
+    rename: "→ Rename",
+    split:  "→ Split",
+    new:    "→ Build new",
+  };
+  return (
+    <div>
+      <div className="font-mono text-xs text-gray-700 mb-1">{name}</div>
+      <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${styles[action]}`}>{labels[action]}</span>
+    </div>
+  );
+};
+
 const PageCategories = ({ lang, t }) => {
   return (
     <div className="space-y-6">
+      {/* Legend */}
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 flex flex-wrap gap-3 text-xs">
+        <span className="font-semibold text-blue-800 self-center">{t ? "Migration:" : "Migration:"}</span>
+        <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-medium">→ Add prefix</span>
+        <span className="text-gray-500 self-center">{t ? "Ordner existiert, nur Nummer fehlt" : "Folder exists, just needs number"}</span>
+        <span className="bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded font-medium">→ Rename</span>
+        <span className="text-gray-500 self-center">{t ? "Ordner umbenennen" : "Folder needs renaming"}</span>
+        <span className="bg-orange-50 text-orange-700 border border-orange-200 px-2 py-0.5 rounded font-medium">→ Split</span>
+        <span className="text-gray-500 self-center">{t ? "Aus Handwerker-Ordner trennen" : "Split out of mixed Handwerker folder"}</span>
+        <span className="bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded font-medium">→ Build new</span>
+        <span className="text-gray-500 self-center">{t ? "Neu erstellen / sammeln" : "Create new / collect scattered files"}</span>
+      </div>
+
       {/* 13 Categories */}
       <div className="bg-white rounded-xl border border-gray-200 p-4">
         <h3 className="font-bold text-gray-800 mb-3">{t ? "13 Mandat-Kategorien (detailliert)" : "13 Mandate Categories (detailed)"}</h3>
@@ -524,6 +571,7 @@ const PageCategories = ({ lang, t }) => {
                 <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">Deutsch</th>
                 <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">English</th>
                 <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">{t ? "Inhalt" : "Contents"}</th>
+                <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">{t ? "Aktueller Ordner" : "Current Folder (Today)"}</th>
                 <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">{t ? "Rechtsgrundlage" : "Legal"}</th>
                 <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">{t ? "Aufbewahrung" : "Retention"}</th>
               </tr>
@@ -534,7 +582,8 @@ const PageCategories = ({ lang, t }) => {
                   <td className="py-2 px-2 text-xs font-bold">{cat.num}</td>
                   <td className="py-2 px-2 text-xs">{cat.icon} {cat.de}</td>
                   <td className="py-2 px-2 text-xs">{cat.en}</td>
-                  <td className="py-2 px-2 text-xs text-gray-600">{cat.desc_en}</td>
+                  <td className="py-2 px-2 text-xs text-gray-600">{t ? cat.desc_de : cat.desc_en}</td>
+                  <td className="py-2 px-2 text-xs">{actionBadge(cat.currentFolder.action, cat.currentFolder.name)}</td>
                   <td className="py-2 px-2 text-xs text-gray-600 font-mono">{cat.legal}</td>
                   <td className="py-2 px-2 text-xs text-gray-600">{cat.retention}</td>
                 </tr>
@@ -546,7 +595,10 @@ const PageCategories = ({ lang, t }) => {
 
       {/* Unit Docs detailed */}
       <div className="bg-white rounded-xl border border-gray-200 p-4">
-        <h3 className="font-bold text-gray-800 mb-3">{t ? "5 Mieter-Dokumente (detailliert)" : "5 Tenant Documents (detailed)"}</h3>
+        <h3 className="font-bold text-gray-800 mb-3">{t ? "5 Mieter-Dokumente pro Einheit (L4)" : "5 Tenant Documents per Unit (L4)"}</h3>
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-2 mb-3 text-xs text-amber-800">
+          <strong>{t ? "Aktueller Stand:" : "Current state:"}</strong> {t ? "Alle Mieter-Dateien liegen lose im Einheiten-Ordner — L4-Unterordner existieren noch nicht." : "All tenant files are loose in the unit folder — L4 sub-folders do not exist yet."}
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -616,6 +668,50 @@ const PageNamingConventions = ({ lang, t }) => {
             <span className="font-bold text-gray-600 min-w-32">{t ? "Max Pfadlänge" : "Max Path Length"}</span>
             <span className="text-gray-600">260 Zeichen (Windows Limit)</span>
           </div>
+        </div>
+      </div>
+
+      {/* Folder Renames: Before → After */}
+      <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <h3 className="font-bold text-gray-800 mb-1">{t ? "Ordner-Umbenennung: Vorher → Nachher" : "Folder Renames: Before → After"}</h3>
+        <p className="text-xs text-gray-500 mb-3">{t ? "Bestehende Ordnernamen und was sich ändert" : "How existing folder names change under the new standard"}</p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-gray-50 border-b border-gray-200">
+                <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">{t ? "Heute" : "Today (Before)"}</th>
+                <th className="text-center py-2 px-2 font-semibold text-gray-600 text-xs"></th>
+                <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">{t ? "Neu (Standard)" : "New (Standard)"}</th>
+                <th className="text-left py-2 px-2 font-semibold text-gray-600 text-xs">{t ? "Aktion" : "Action"}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { before: "Ablage/", after: "01 Ablage/", action: "prefix", note: t ? "Nummer voranstellen" : "Add number prefix" },
+                { before: "Bewirtschaftungsvertrag/", after: "02 Bewirtschaftungsvertrag/", action: "prefix", note: t ? "Nummer voranstellen" : "Add number prefix" },
+                { before: "Buchhaltung/", after: "03 Buchhaltung/", action: "prefix", note: t ? "Nummer voranstellen" : "Add number prefix" },
+                { before: "Versicherungen/", after: "04 Versicherungen/", action: "prefix", note: t ? "Nummer voranstellen" : "Add number prefix" },
+                { before: "Handwerker/ ⚠", after: "05 Service-Verträge/  +  11 Renovationen/", action: "split", note: t ? "Aufteilen in zwei Kategorien" : "Split into two categories" },
+                { before: "Hauswart/", after: "06 Hauswartung/", action: "rename", note: t ? "Umbenennen + Nummer" : "Rename + add number" },
+                { before: "Versicherungsschäden/", after: "07 Versicherungsschäden/", action: "prefix", note: t ? "Nummer voranstellen" : "Add number prefix" },
+                { before: "— (verstreut in Ablage)", after: "08 Korrespondenz/", action: "new", note: t ? "Neuer Ordner, Dateien einsammeln" : "New folder, collect scattered files" },
+                { before: "Pläne/", after: "09 Pläne/", action: "prefix", note: t ? "Nummer voranstellen" : "Add number prefix" },
+                { before: "Fotos/", after: "10 Fotos/", action: "prefix", note: t ? "Nummer voranstellen" : "Add number prefix" },
+                { before: "Mieter/", after: "12 Mietverhältnisse/", action: "rename", note: t ? "Umbenennen + Nummer" : "Rename + add number" },
+                { before: "SINA/ (1 Datei)", after: "13 Compliance/", action: "new", note: t ? "Umbenennen + neu aufbauen" : "Rename + build out" },
+              ].map((row, idx) => {
+                const badgeStyle = { prefix: "bg-emerald-50 text-emerald-700 border-emerald-200", rename: "bg-amber-50 text-amber-700 border-amber-200", split: "bg-orange-50 text-orange-700 border-orange-200", new: "bg-red-50 text-red-700 border-red-200" }[row.action];
+                return (
+                  <tr key={idx} className={`border-b border-gray-100 ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <td className="py-2 px-2 text-xs font-mono text-gray-500">{row.before}</td>
+                    <td className="py-2 px-2 text-xs text-center text-gray-400">→</td>
+                    <td className="py-2 px-2 text-xs font-mono font-semibold text-gray-800">{row.after}</td>
+                    <td className="py-2 px-2 text-xs"><span className={`px-1.5 py-0.5 rounded border font-medium ${badgeStyle}`}>{row.note}</span></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
 
